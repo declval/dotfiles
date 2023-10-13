@@ -1,0 +1,99 @@
+XF86AudioLowerVolume
+    amixer set Master 5%-
+
+XF86AudioMute
+    amixer set Master toggle
+
+XF86AudioRaiseVolume
+    amixer set Master 5%+
+
+XF86MonBrightnessDown
+    brightness down 10
+
+XF86MonBrightnessUp
+    brightness up 10
+
+alt + l
+    slock
+
+super + @space
+    dmenu_run \
+        -fn "`xrdb -get font`" \
+        -nb "`xrdb -get color0`" \
+        -nf "`xrdb -get foreground`" \
+        -sb "`xrdb -get color0`" \
+        -sf "`xrdb -get color5`"
+
+super + Escape
+    pkill -USR1 -x sxhkd
+
+super + Return
+    st -f "`xrdb -get font`"
+
+super + alt + shift + {h,j,k,l}
+    bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+super + alt + {h,j,k,l}
+    bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+super + alt + {q,r}
+    bspc {quit,wm -r}
+
+super + bracket{left,right}
+    bspc desktop -f {prev,next}.local
+
+super + ctrl + shift + space
+    bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+super + ctrl + space
+    bspc node -p cancel
+
+super + ctrl + {1-9}
+    bspc node -o 0.{1-9}
+
+super + ctrl + {h,j,k,l}
+    bspc node -p {west,south,north,east}
+
+super + ctrl + {m,x,y,z}
+    bspc node -g {marked,locked,sticky,private}
+
+super + g
+    bspc node -s biggest.window
+
+super + m
+    bspc desktop -l next
+
+super + shift + {p,r}
+    systemctl {poweroff,reboot}
+
+super + y
+    bspc node newest.marked.local -n newest.!automatic.local
+
+super + {Left,Down,Up,Right}
+    bspc node -v {-20 0,0 20,0 -20,20 0}
+
+super + {_,shift + }c
+    bspc node -f {next,prev}.local.!hidden.window
+
+super + {_,shift + }w
+    bspc node -{c,k}
+
+super + {_,shift + }{1-9,0}
+    bspc {desktop -f,node -d} '^{1-9,10}'
+
+super + {_,shift + }{h,j,k,l}
+    bspc node -{f,s} {west,south,north,east}
+
+super + {grave,Tab}
+    bspc {node,desktop} -f last
+
+super + {o,i}
+    bspc wm -h off; \
+    bspc node {older,newer} -f; \
+    bspc wm -h on
+
+super + {p,b,comma,period}
+    bspc node -f @{parent,brother,first,second}
+
+super + {t,shift + t,s,f}
+    bspc node -t {tiled,pseudo_tiled,floating,fullscreen}

@@ -1,0 +1,29 @@
+#!/bin/sh
+
+SLEEP_TIMEOUT=1800
+
+$HOME/.fehbg &
+
+pkill picom; picom &
+pkill polybar; polybar &
+pkill sxhkd; sxhkd &
+
+xrdb -merge $HOME/.Xresources
+
+xset dpms $SLEEP_TIMEOUT $SLEEP_TIMEOUT $SLEEP_TIMEOUT &
+xset r rate 300 50 &
+xset s $SLEEP_TIMEOUT $SLEEP_TIMEOUT &
+
+xsetroot -cursor_name left_ptr &
+
+bspc config border_width 4
+bspc config borderless_monocle true
+bspc config focused_border_color "`xrdb -get color5`"
+bspc config gapless_monocle true
+bspc config normal_border_color "`xrdb -get color0`"
+bspc config presel_feedback_color "`xrdb -get color5`"
+bspc config single_monocle true
+bspc config split_ratio 0.5
+bspc config window_gap 20
+
+bspc monitor -d 1 2

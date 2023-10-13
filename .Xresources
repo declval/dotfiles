@@ -1,0 +1,24 @@
+Xcursor.theme: Bibata-Modern-Ice
+Xft.dpi: 120
+
+*font: Source Code Pro:size=12
+
+*background: #181818
+*foreground: #cecece
+
+*color0: #282828
+*color1: #d82b53
+*color2: #9eedc6
+*color3: #e7eaa6
+*color4: #838293
+*color5: #9f9db2
+*color6: #b9e5d6
+*color7: #5f5f5f
+*color8: #8f8f8f
+*color9: #d82b53
+*color10: #9eedc6
+*color11: #e7eaa6
+*color12: #838293
+*color13: #9f9db2
+*color14: #b9e5d6
+*color15: #acacac
