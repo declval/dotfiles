@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+
+"$HOME/.fehbg" &
+
+pgrep -x fcitx5 || fcitx5 &
+pgrep -x xss-lock || xss-lock slock &
+
+pkill -x polybar; polybar --reload &
+
+xrdb -merge "$HOME/.Xresources"
+
+xset r rate 256 50
+xset s 1800
+
+xsetroot -cursor_name left_ptr
+
+hc() {
+    herbstclient "$@"
+}
+
+hc emit_hook reload
+
+Mod=Mod4
+
+hc rename default 1
+
+hc add 1
+hc add 2
+
+hc attr theme.border_width 4
+hc attr theme.color '#191919'
+hc attr theme.inner_color '#323232'
+hc attr theme.inner_width 1
+hc attr theme.outer_color '#323232'
+hc attr theme.outer_width 1
+hc attr theme.title_align center
+hc attr theme.title_color '#898989'
+hc attr theme.title_depth 8
+hc attr theme.title_font 'Source Code Pro:pixelsize=18'
+hc attr theme.title_height 23
+
+hc attr theme.active.title_color '#ebebeb'
+
+hc keyunbind --all
+
+hc keybind $Mod-1 use_index 0
+hc keybind $Mod-2 use_index 1
+hc keybind $Mod-Control-h resize left +0.1
+hc keybind $Mod-Control-j resize down +0.1
+hc keybind $Mod-Control-k resize up +0.1
+hc keybind $Mod-Control-l resize right +0.1
+hc keybind $Mod-Control-space split explode
+hc keybind $Mod-Return spawn st
+hc keybind $Mod-Shift-1 move_index 0
+hc keybind $Mod-Shift-2 move_index 1
+hc keybind $Mod-Shift-Tab cycle_all -1
+hc keybind $Mod-Shift-c close
+hc keybind $Mod-Shift-d set_attr clients.focus.decorated toggle
+hc keybind $Mod-Shift-f set_attr clients.focus.floating toggle
+hc keybind $Mod-Shift-h shift left
+hc keybind $Mod-Shift-j shift down
+hc keybind $Mod-Shift-k shift up
+hc keybind $Mod-Shift-l shift right
+hc keybind $Mod-Shift-q quit
+hc keybind $Mod-Shift-r reload
+hc keybind $Mod-Tab cycle_all +1
+hc keybind $Mod-d spawn dmenu_run
+hc keybind $Mod-f fullscreen toggle
+hc keybind $Mod-h focus left
+hc keybind $Mod-j focus down
+hc keybind $Mod-k focus up
+hc keybind $Mod-l focus right
+hc keybind $Mod-o split right 0.5
+hc keybind $Mod-p pseudotile toggle
+hc keybind $Mod-r remove
+hc keybind $Mod-s floating toggle
+hc keybind $Mod-space \
+    or , and . compare tags.focus.curframe_wcount = 2 \
+             . cycle_layout +1 vertical horizontal max vertical grid \
+       , cycle_layout +1
+hc keybind $Mod-u split bottom 0.5
+hc keybind Mod1-Shift-l spawn slock
+hc keybind Mod1-Shift-p spawn systemctl poweroff
+hc keybind XF86_AudioLowerVolume spawn wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%-
+hc keybind XF86_AudioMute spawn wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+hc keybind XF86_AudioRaiseVolume spawn wpctl set-volume --limit 1.5 @DEFAULT_AUDIO_SINK@ 10%+
+
+hc mouseunbind --all
+
+hc mousebind $Mod-Button1 move
+hc mousebind $Mod-Button2 zoom
+hc mousebind $Mod-Button3 resize
+
+hc set frame_bg_active_color '#0a0a0a'
+hc set frame_border_active_color '#edeac7'
+hc set frame_border_normal_color '#0a0a0a'
+hc set frame_gap 0
+hc set smart_frame_surroundings on
+
+hc unlock
